@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=77"]  # PEP 639 license metadata
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "etkinlik-radari"
+dynamic = ["version"]
+description = "Teknoloji, girişim ve kültür-sanat etkinliklerini 21 kaynaktan toplayan, Türkçe/İngilizce masaüstü uygulaması"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE", "THIRD_PARTY_NOTICES.md"]
+requires-python = ">=3.10"
+keywords = ["events", "startup", "hackathon", "concerts", "theatre", "culture", "desktop", "pywebview"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: MacOS",
+    "Operating System :: POSIX :: Linux",
+    "Environment :: X11 Applications :: Qt",
+    "Natural Language :: Turkish",
+    "Natural Language :: English",
+    "Topic :: Office/Business :: Scheduling",
+]
+dependencies = [
+    # Windows uses Edge WebView2 (pythonnet), macOS uses WebKit (pyobjc) — both pulled in by pywebview.
+    "pywebview>=5.0; sys_platform != 'linux'",
+    # Linux: Qt WebEngine wheels, so no system GTK/WebKit packages are needed.
+    "pywebview[qt]>=5.0; sys_platform == 'linux'",
+    "requests>=2.31",
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[project.gui-scripts]
+etkinlik-radari = "etkinlik_radari.app:main"
+
+[tool.setuptools.dynamic]
+version = { attr = "etkinlik_radari.__version__" }
+
+[tool.setuptools.packages.find]
+include = ["etkinlik_radari*"]
+
+[tool.setuptools.package-data]
+etkinlik_radari = ["ui/*.html", "ui/*.css", "ui/*.js", "ui/flags/*", "assets/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

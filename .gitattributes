@@ -1,0 +1,5 @@
+# keep LF in the repository so the project checks out the same on Windows, macOS and Linux
+* text=auto eol=lf
+*.jpg binary
+*.png binary
+*.ico binary

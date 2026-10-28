@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="tr" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <title>Etkinlik Radarı</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-logo" data-icon="radar"></div>
+      <div><b>Etkinlik Radarı</b><small><span data-i18n="brand_sub"></span> <span id="app-version"></span></small></div>
+    </div>
+    <button class="nav-btn active" data-view="discover"><i data-icon="compass"></i><span data-i18n="nav_discover"></span><span class="badge" id="cnt-discover"></span></button>
+    <button class="nav-btn" data-view="calendar"><i data-icon="calendar"></i><span data-i18n="nav_calendar"></span></button>
+    <button class="nav-btn" data-view="saved"><i data-icon="bookmark"></i><span data-i18n="nav_saved"></span><span class="badge" id="cnt-saved"></span></button>
+    <button class="nav-btn" data-view="news"><i data-icon="news"></i><span data-i18n="nav_news"></span></button>
+    <button class="nav-btn" data-view="sources"><i data-icon="db"></i><span data-i18n="nav_sources"></span></button>
+    <button class="nav-btn" data-view="profile"><i data-icon="user"></i><span data-i18n="nav_profile"></span></button>
+    <button class="nav-btn" data-view="about"><i data-icon="info"></i><span data-i18n="nav_about"></span></button>
+    <div class="spacer"></div>
+    <div class="refresh-card">
+      <button class="btn primary" id="refresh-btn"><i data-icon="refresh"></i><span data-i18n="refresh"></span></button>
+      <div class="progress"><div id="refresh-bar"></div></div>
+      <div class="meta" id="refresh-meta">—</div>
+    </div>
+    <div class="theme-row">
+      <button class="btn ghost small" id="theme-btn" style="flex:1"><i data-icon="moon"></i><span></span></button>
+      <button class="btn ghost small" id="lang-btn" title="Dil / Language"><i data-icon="languages"></i><span></span></button>
+    </div>
+  </aside>
+
+  <main>
+    <!-- DISCOVER -->
+    <section class="view active" id="view-discover">
+      <div class="topbar">
+        <div class="seg mode-seg" id="mode-seg">
+          <button data-v="personal" data-i18n-title="mode_personal_tip"><i data-icon="sparkles"></i><span data-i18n="mode_personal"></span></button>
+          <button data-v="all" data-i18n-title="mode_all_tip"><i data-icon="list"></i><span data-i18n="mode_all"></span></button>
+        </div>
+        <label class="search"><i data-icon="search"></i><input id="q" data-i18n-ph="search_ph"></label>
+        <div class="seg" id="time-seg">
+          <button data-v="all" class="on" data-i18n="time_all"></button>
+          <button data-v="week" data-i18n="time_week"></button>
+          <button data-v="month" data-i18n="time_month"></button>
+          <button data-v="q" data-i18n="time_q"></button>
+        </div>
+        <select class="sel" id="sort"></select>
+        <div class="seg" id="layout-seg">
+          <button data-v="grid" class="on" data-i18n-title="layout_grid"><i data-icon="grid"></i></button>
+          <button data-v="list" data-i18n-title="layout_list"><i data-icon="list"></i></button>
+        </div>
+      </div>
+      <div class="filters">
+        <div class="seg domain-seg" id="domain-seg"></div>
+        <div class="chips" id="cat-chips"></div>
+        <div class="filter-row">
+          <div class="seg" id="region-seg"></div>
+          <select class="sel" id="kind-sel"></select>
+          <select class="sel" id="src-sel"></select>
+          <label class="toggle"><input type="checkbox" id="f-free"><span class="sw"></span><span data-i18n="f_free"></span></label>
+          <label class="toggle"><input type="checkbox" id="f-past"><span class="sw"></span><span data-i18n="f_past"></span></label>
+          <label class="toggle" id="f-hidden-wrap"><input type="checkbox" id="f-hidden"><span class="sw"></span><span data-i18n="f_hidden"></span></label>
+          <button class="btn ghost small" id="clear-filters"><i data-icon="x"></i><span data-i18n="f_clear"></span></button>
+        </div>
+      </div>
+      <div id="featured-wrap">
+        <div class="section-head"><h2><i data-icon="sparkles"></i><span id="featured-title"></span></h2><span class="muted" id="featured-sub"></span></div>
+        <div class="featured" id="featured"></div>
+      </div>
+      <div class="section-head"><h2 id="result-title"></h2><span class="muted" id="result-count"></span></div>
+      <div class="grid" id="grid"></div>
+      <div class="more" id="more-wrap"><button class="btn" id="more-btn"></button></div>
+    </section>
+
+    <!-- CALENDAR -->
+    <section class="view" id="view-calendar">
+      <div class="view-title"><h1 data-i18n="cal_title"></h1><p data-i18n="cal_sub"></p></div>
+      <div class="cal-wrap">
+        <div>
+          <div class="cal-head">
+            <button class="btn small" id="cal-prev"><i data-icon="left"></i></button>
+            <h2 id="cal-title"></h2>
+            <button class="btn small" id="cal-next"><i data-icon="right"></i></button>
+            <button class="btn small ghost" id="cal-today" data-i18n="cal_today"></button>
+            <span style="flex:1"></span>
+            <label class="toggle"><input type="checkbox" id="cal-saved"><span class="sw"></span><span data-i18n="cal_saved"></span></label>
+            <label class="toggle" id="cal-top-wrap"><input type="checkbox" id="cal-top" checked><span class="sw"></span><span data-i18n="cal_top"></span></label>
+          </div>
+          <div class="cal" id="cal"></div>
+        </div>
+        <div class="day-panel" id="day-panel"></div>
+      </div>
+    </section>
+
+    <!-- SAVED -->
+    <section class="view" id="view-saved">
+      <div class="view-title"><h1 data-i18n="saved_title"></h1></div>
+      <div class="seg" id="saved-seg" style="margin-bottom:18px">
+        <button data-v="save" class="on"><i data-icon="bookmark"></i> <span data-i18n="saved_save"></span></button>
+        <button data-v="like"><i data-icon="up"></i> <span data-i18n="saved_like"></span></button>
+        <button data-v="attended"><i data-icon="check"></i> <span data-i18n="saved_attended"></span></button>
+        <button data-v="dislike"><i data-icon="eyeoff"></i> <span data-i18n="saved_dislike"></span></button>
+      </div>
+      <div class="grid" id="saved-grid"></div>
+    </section>
+
+    <!-- NEWS -->
+    <section class="view" id="view-news">
+      <div class="view-title"><h1 data-i18n="news_title"></h1><p data-i18n="news_sub"></p></div>
+      <div id="news-chips"></div>
+      <div id="news-list"></div>
+    </section>
+
+    <!-- SOURCES -->
+    <section class="view" id="view-sources">
+      <div class="view-title"><h1 data-i18n="src_title"></h1><p id="src-summary"></p></div>
+      <div id="src-groups"></div>
+    </section>
+
+    <!-- PROFILE -->
+    <section class="view" id="view-profile">
+      <div class="view-title"><h1 data-i18n="prof_title"></h1><p data-i18n="prof_sub"></p></div>
+      <div class="prof-grid">
+        <div class="stack">
+          <div class="panel">
+            <h2 data-i18n="prof_general"></h2>
+            <div class="set-row"><span data-i18n="prof_lang"></span><div class="seg" id="prof-lang">
+              <button data-v="tr">Türkçe</button><button data-v="en">English</button></div></div>
+            <div class="set-row"><span data-i18n="prof_mode"></span><div class="seg" id="prof-mode">
+              <button data-v="personal" data-i18n="mode_personal"></button><button data-v="all" data-i18n="mode_all"></button></div></div>
+            <div class="set-row top"><span data-i18n="prof_domains"></span><div class="domain-checks" id="prof-domains"></div></div>
+            <p class="hint" data-i18n="prof_domains_hint"></p>
+          </div>
+          <div class="panel"><h2 data-i18n="prof_interests"></h2><p data-i18n="prof_interests_sub"></p><div id="prof-cats"></div></div>
+          <div class="panel"><h2 data-i18n="prof_kinds"></h2><p></p><div id="prof-kinds"></div></div>
+        </div>
+        <div class="stack">
+          <div class="panel"><h2 data-i18n="prof_regions"></h2><p></p><div id="prof-regions"></div></div>
+          <div class="panel">
+            <h2 data-i18n="prof_luma"></h2><p data-i18n="prof_luma_sub"></p>
+            <div class="tag-input" id="luma-tags"></div>
+            <div class="suggest" id="luma-suggest"></div>
+          </div>
+          <div class="panel">
+            <h2 data-i18n="prof_eb"></h2><p data-i18n="prof_eb_sub"></p>
+            <div class="tag-input" id="eb-tags"></div>
+            <div class="suggest" id="eb-suggest"></div>
+          </div>
+          <div class="panel">
+            <h2 data-i18n="prof_fc"></h2><p data-i18n="prof_fc_sub"></p>
+            <div class="tag-input" id="fc-tags"></div>
+            <div class="suggest" id="fc-suggest"></div>
+          </div>
+          <div class="panel">
+            <h2 data-i18n="prof_learned"></h2><p data-i18n="prof_learned_sub"></p>
+            <div id="learned"></div>
+            <div class="btn-row" style="margin-top:12px"><button class="btn small" id="reset-learning"><i data-icon="refresh"></i><span data-i18n="prof_reset_learning"></span></button>
+              <button class="btn small ghost" id="rerun-onboarding" data-i18n="prof_wizard"></button>
+              <button class="btn small ghost" id="factory-reset" data-i18n="prof_factory"></button></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT & HELP -->
+    <section class="view" id="view-about">
+      <div class="view-title"><h1 data-i18n="about_title"></h1><p data-i18n="about_sub"></p></div>
+      <div class="about-grid">
+        <div class="stack" id="about-left"></div>
+        <div class="stack" id="about-right"></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer"></aside>
+
+<div class="setup" id="setup">
+  <div class="setup-win">
+    <aside class="setup-rail">
+      <div class="brand"><div class="brand-logo" data-icon="radar"></div><div><b>Etkinlik Radarı</b><small data-i18n="w_wizard"></small></div></div>
+      <ol class="setup-steps" id="setup-steps"></ol>
+      <small class="setup-foot" data-i18n="w_foot"></small>
+    </aside>
+    <section class="setup-main">
+      <header class="setup-head"><small id="setup-count"></small><h2 id="setup-title"></h2><p id="setup-sub"></p></header>
+      <div class="setup-body" id="setup-body"></div>
+      <footer class="setup-foot-bar">
+        <button class="btn ghost" id="setup-cancel" data-i18n="w_cancel"></button>
+        <span style="flex:1"></span>
+        <button class="btn" id="setup-back" data-i18n="w_back"></button>
+        <button class="btn primary" id="setup-next" data-i18n="w_next"></button>
+      </footer>
+    </section>
+  </div>
+</div>
+
+<div class="toast" id="toast"><span id="toast-msg"></span><button id="toast-act"></button></div>
+<script src="i18n.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

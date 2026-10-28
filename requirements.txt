@@ -1,0 +1,5 @@
+# Same as pyproject.toml — for `pip install -r requirements.txt` + `python -m etkinlik_radari` from a checkout.
+pywebview>=5.0; sys_platform != "linux"
+pywebview[qt]>=5.0; sys_platform == "linux"
+requests>=2.31
+PyYAML>=6.0

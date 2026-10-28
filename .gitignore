@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+.build-venv/
+venv/
+.pytest_cache/
+
+# Local data (the app stores its database in the per-user data folder; this is the old location)
+data/
+*.db
+*.db-journal
+
+# OS / editors
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
