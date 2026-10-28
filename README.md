@@ -1,4 +1,4 @@
-# Etkinlik Radarı
+﻿# Etkinlik Radarı
 
 Teknoloji, girişim ve **kültür-sanat** etkinliklerini **21 kaynaktan** toplayan açık kaynak masaüstü uygulaması.
 Etkinlikleri ilgi alanlarına ve beğenilerine göre sıralar, istersen kişiselleştirme olmadan hepsini tarih sırasıyla
@@ -10,7 +10,7 @@ gösterir. Türkçe ve İngilizce arayüz; Windows, macOS ve Linux.
 
 | | |
 |---|---|
-| **Windows (kolay kurulum)** | [Releases](https://github.com/KULLANICI_ADI/etkinlik-radari/releases/latest) sayfasından **`EtkinlikRadari-<sürüm>-Setup.exe`** dosyasını indir, çift tıkla, sihirbazı izle. Python gerekmez. |
+| **Windows (kolay kurulum)** | [Releases](https://github.com/eminaruk/etkinlik-radari/releases/latest) sayfasından **`EtkinlikRadari-<sürüm>-Setup.exe`** dosyasını indir, çift tıkla, sihirbazı izle. Python gerekmez. |
 | **Windows / macOS / Linux (kaynak koddan)** | Aşağıdaki [Kaynak koddan kurulum](#kaynak-koddan-kurulum) adımları. |
 
 > Windows SmartScreen "Windows bilgisayarınızı korudu" uyarısı gösterirse **Ek bilgi → Yine de çalıştır**'a tıkla
@@ -46,7 +46,7 @@ gösterir. Türkçe ve İngilizce arayüz; Windows, macOS ve Linux.
 
 Gerekenler: **Python 3.10 veya üstü** ve internet bağlantısı.
 
-1. Projeyi indir: `git clone https://github.com/KULLANICI_ADI/etkinlik-radari.git`
+1. Projeyi indir: `git clone https://github.com/eminaruk/etkinlik-radari.git`
    (veya GitHub'da **Code → Download ZIP** ile indirip klasörü aç).
 2. Klasörün içinde kurulum aracını çalıştır:
 
@@ -200,7 +200,7 @@ Katılmadan önce tarih, yer ve ücret bilgilerini etkinliğin kendi sayfasında
 - X (Twitter): [@eminarukk](https://x.com/eminarukk)
 - LinkedIn: [linkedin.com/in/eminaruk](https://tr.linkedin.com/in/eminaruk)
 
-Hata bildirimi ve önerilerin için [Issues](https://github.com/KULLANICI_ADI/etkinlik-radari/issues) sayfasını kullanabilirsin; katkılar (pull request) memnuniyetle
+Hata bildirimi ve önerilerin için [Issues](https://github.com/eminaruk/etkinlik-radari/issues) sayfasını kullanabilirsin; katkılar (pull request) memnuniyetle
 karşılanır.
 
 ## Lisans
